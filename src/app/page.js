@@ -115,7 +115,7 @@ export default function Home() {
 
       {/* CTA */}
       <section className="py-32 text-center relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-indigo-600 via-violet-600 to-purple-700 opacity-90"></div>
+        <div className="absolute inset-0 bg-linear-to-br from-indigo-600 via-violet-600 to-purple-700 opacity-90"></div>
 
         <div className="relative z-10 max-w-4xl mx-auto px-6">
           <h2 className="text-4xl font-bold mb-6">
