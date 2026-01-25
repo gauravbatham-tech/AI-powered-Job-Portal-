@@ -1,0 +1,36 @@
+<svg width="40" height="40" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+
+  <defs>
+    <linearGradient id="rx" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#4F46E5"/>
+      <stop offset="100%" stop-color="#7C3AED"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect x="8" y="8" width="104" height="104" rx="26" fill="url(#rx)" />
+
+  <!-- Letter R -->
+  <path
+    d="M38 30
+       H60
+       C70 30 76 36 76 44
+       C76 52 70 58 60 58
+       H38
+       V30
+       Z
+       M60 58
+       L78 90"
+    fill="white"
+  />
+
+  <!-- Letter X -->
+  <path
+    d="M70 32 L92 88
+       M92 32 L70 88"
+    stroke="white"
+    stroke-width="8"
+    stroke-linecap="round"
+  />
+
+</svg>

@@ -4,6 +4,7 @@ import { useAuth } from '@/context/AuthContext';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
+import Image from 'next/image';
 
 export default function Navbar() {
   const { user, logout } = useAuth();
@@ -20,8 +21,17 @@ export default function Navbar() {
       <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
 
         {/* LOGO */}
-        <Link href="/" className="text-xl font-extrabold tracking-tight">
-          <span className="gradient-text">RecruitX</span>
+        <Link href="/" className="flex items-center gap-3">
+          <Image
+            src="/recruitx-logo.svg"
+            alt="RecruitX"
+            width={28}
+            height={28}
+            priority
+          />
+          <span className="text-xl font-extrabold tracking-tight gradient-text">
+            RecruitX
+          </span>
         </Link>
 
         {/* RIGHT */}
@@ -43,13 +53,11 @@ export default function Navbar() {
 
           {user && (
             <>
-              {/* AI SCORE BADGE */}
               <div className="hidden md:flex items-center gap-2 px-3 py-1 rounded-full border border-indigo-400/30 bg-indigo-500/10 text-indigo-300 text-xs font-semibold">
                 AI Score
                 <span className="text-white font-bold">78%</span>
               </div>
 
-              {/* AVATAR */}
               <div className="relative">
                 <button
                   onClick={() => setOpen(!open)}
@@ -64,30 +72,17 @@ export default function Navbar() {
                   </span>
                 </button>
 
-                {/* DROPDOWN */}
                 {open && (
                   <div className="absolute right-0 mt-3 w-48 glass p-2 text-sm">
-                    <Link
-                      href="/dashboard"
-                      className="block px-3 py-2 rounded-lg hover:bg-white/10"
-                    >
+                    <Link href="/dashboard" className="block px-3 py-2 rounded-lg hover:bg-white/10">
                       Dashboard
                     </Link>
-
-                    <Link
-                      href="/profile"
-                      className="block px-3 py-2 rounded-lg hover:bg-white/10"
-                    >
+                    <Link href="/profile" className="block px-3 py-2 rounded-lg hover:bg-white/10">
                       Profile
                     </Link>
-
-                    <Link
-                      href="/applications"
-                      className="block px-3 py-2 rounded-lg hover:bg-white/10"
-                    >
+                    <Link href="/applications" className="block px-3 py-2 rounded-lg hover:bg-white/10">
                       Applications
                     </Link>
-
                     <button
                       onClick={handleLogout}
                       className="w-full text-left px-3 py-2 rounded-lg hover:bg-red-500/10 text-red-400"
