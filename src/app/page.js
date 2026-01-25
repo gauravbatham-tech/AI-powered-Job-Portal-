@@ -38,7 +38,7 @@ export default function Home() {
 
           <Link
             href="/jobs"
-            className="px-10 py-4 border border-indigo-400 text-indigo-300 rounded-xl font-semibold hover:bg-white/5 transition"
+            className="px-10 py-4 border border-indigo-400 text-indigo-300 rounded-xl font-semibold hover:bg-indigo-600 hover:text-white transition"
           >
             Explore Smart Jobs
           </Link>
@@ -135,7 +135,7 @@ export default function Home() {
 
             <Link
               href="/jobs"
-              className="px-10 py-4 border border-white rounded-xl font-semibold hover:bg-white/10 transition"
+              className="px-10 py-4 border border-white rounded-xl font-semibold hover:bg-white hover:text-indigo-500"
             >
               View Smart Jobs
             </Link>
