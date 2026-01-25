@@ -1,10 +1,9 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { jobService } from '@/services/index';
+import { jobService } from '@/services';
 import { ProtectedRoute } from '@/hooks/ProtectedRoute';
 import JobCard from '@/components/JobCard';
-import Link from 'next/link';
 
 export default function JobsPage() {
   const [jobs, setJobs] = useState([]);
@@ -20,129 +19,135 @@ export default function JobsPage() {
   });
 
   useEffect(() => {
-    const fetchJobs = async () => {
-      try {
-        setLoading(true);
-        const response = await jobService.getAllJobs(filters);
-        setJobs(response.data.jobs);
-      } catch (err) {
-        setError('Failed to load jobs');
-      } finally {
-        setLoading(false);
-      }
-    };
-
     fetchJobs();
   }, [filters.page]);
 
-  const handleFilterChange = (e) => {
-    const { name, value } = e.target;
-    setFilters(prev => ({
-      ...prev,
-      [name]: value,
-      page: 1
-    }));
-  };
-
-  const handleSearch = async (e) => {
-    e.preventDefault();
+  const fetchJobs = async () => {
     try {
       setLoading(true);
-      const response = await jobService.getAllJobs(filters);
-      setJobs(response.data.jobs);
-    } catch (err) {
-      setError('Search failed');
+      const res = await jobService.getAllJobs(filters);
+      setJobs(res.data.jobs);
+    } catch {
+      setError('Failed to load jobs');
     } finally {
       setLoading(false);
     }
   };
 
+  const handleChange = (e) => {
+    setFilters({ ...filters, [e.target.name]: e.target.value, page: 1 });
+  };
+
+  const handleSearch = (e) => {
+    e.preventDefault();
+    fetchJobs();
+  };
+
   return (
     <ProtectedRoute>
-      <div className="min-h-screen bg-gray-50 py-8">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          {/* Search & Filters */}
-          <div className="bg-white rounded-lg shadow-md p-6 mb-8">
-            <h2 className="text-2xl font-bold text-gray-900 mb-6">Find Jobs</h2>
-            
-            <form onSubmit={handleSearch} className="space-y-4">
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-                <input
-                  type="text"
-                  name="keyword"
-                  placeholder="Job title or keyword"
-                  value={filters.keyword}
-                  onChange={handleFilterChange}
-                  className="px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                />
-                <input
-                  type="text"
-                  name="category"
-                  placeholder="Category"
-                  value={filters.category}
-                  onChange={handleFilterChange}
-                  className="px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                />
-                <input
-                  type="text"
-                  name="experienceLevel"
-                  placeholder="Experience Level"
-                  value={filters.experienceLevel}
-                  onChange={handleFilterChange}
-                  className="px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                />
-                <input
-                  type="text"
-                  name="location"
-                  placeholder="Location"
-                  value={filters.location}
-                  onChange={handleFilterChange}
-                  className="px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                />
-              </div>
+
+      <div className="min-h-screen ai-bg px-6 py-12">
+
+        <div className="max-w-7xl mx-auto">
+
+          {/* SEARCH PANEL */}
+          <div className="glass p-8 mb-10">
+            <h2 className="text-2xl font-bold mb-6">
+              Discover AI-Matched Jobs
+            </h2>
+
+            <form onSubmit={handleSearch} className="grid grid-cols-1 md:grid-cols-4 gap-4">
+
+              <input
+                name="keyword"
+                placeholder="Role or keyword"
+                value={filters.keyword}
+                onChange={handleChange}
+                className="bg-white/5 border border-white/10 px-4 py-3 rounded-xl text-sm focus:outline-none"
+              />
+
+              <input
+                name="category"
+                placeholder="Category"
+                value={filters.category}
+                onChange={handleChange}
+                className="bg-white/5 border border-white/10 px-4 py-3 rounded-xl text-sm focus:outline-none"
+              />
+
+              <input
+                name="experienceLevel"
+                placeholder="Experience"
+                value={filters.experienceLevel}
+                onChange={handleChange}
+                className="bg-white/5 border border-white/10 px-4 py-3 rounded-xl text-sm focus:outline-none"
+              />
+
+              <input
+                name="location"
+                placeholder="Location"
+                value={filters.location}
+                onChange={handleChange}
+                className="bg-white/5 border border-white/10 px-4 py-3 rounded-xl text-sm focus:outline-none"
+              />
 
               <button
                 type="submit"
-                className="w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700 font-semibold"
+                className="md:col-span-4 bg-indigo-600 hover:bg-indigo-700 py-3 rounded-xl font-semibold transition"
               >
                 Search Jobs
               </button>
             </form>
           </div>
 
-          {/* Jobs Grid */}
-          {loading ? (
-            <div className="text-center py-12">Loading jobs...</div>
-          ) : error ? (
-            <div className="text-red-600 text-center py-12">{error}</div>
-          ) : (
+          {/* JOB LIST */}
+          {loading && (
+            <div className="glass p-12 text-center muted">
+              Loading jobs...
+            </div>
+          )}
+
+          {error && (
+            <div className="glass p-12 text-center text-red-400">
+              {error}
+            </div>
+          )}
+
+          {!loading && !error && (
             <>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-10">
                 {jobs.length > 0 ? (
-                  jobs.map(job => (
+                  jobs.map((job) => (
                     <JobCard key={job.id} job={job} />
                   ))
                 ) : (
-                  <div className="col-span-full text-center text-gray-600 py-12">
-                    No jobs found. Try adjusting your filters.
+                  <div className="col-span-full text-center muted py-12">
+                    No jobs found. Try different filters.
                   </div>
                 )}
               </div>
 
-              {/* Pagination */}
+              {/* PAGINATION */}
               {jobs.length > 0 && (
-                <div className="flex justify-center gap-4">
+                <div className="flex justify-center items-center gap-6">
                   <button
-                    onClick={() => setFilters(prev => ({ ...prev, page: Math.max(1, prev.page - 1) }))}
                     disabled={filters.page === 1}
-                    className="px-4 py-2 bg-gray-200 rounded-md disabled:opacity-50"
+                    onClick={() =>
+                      setFilters((p) => ({ ...p, page: Math.max(1, p.page - 1) }))
+                    }
+                    className="px-5 py-2 rounded-xl bg-white/5 border border-white/10 disabled:opacity-40"
                   >
                     Previous
                   </button>
-                  <span className="px-4 py-2">Page {filters.page}</span>
+
+                  <span className="muted text-sm">
+                    Page {filters.page}
+                  </span>
+
                   <button
-                    onClick={() => setFilters(prev => ({ ...prev, page: prev.page + 1 }))}
-                    className="px-4 py-2 bg-gray-200 rounded-md"
+                    onClick={() =>
+                      setFilters((p) => ({ ...p, page: p.page + 1 }))
+                    }
+                    className="px-5 py-2 rounded-xl bg-white/5 border border-white/10"
                   >
                     Next
                   </button>
@@ -150,8 +155,10 @@ export default function JobsPage() {
               )}
             </>
           )}
+
         </div>
       </div>
+
     </ProtectedRoute>
   );
 }

@@ -1,10 +1,9 @@
 'use client';
 
 import { useState } from 'react';
-import { jobService } from '@/services/index';
+import { jobService } from '@/services';
 import { ProtectedRoute } from '@/hooks/ProtectedRoute';
 import { useRouter } from 'next/navigation';
-import { EXPERIENCE_LEVELS, JOB_CATEGORIES } from '@/config/constants';
 
 const experienceLevels = ['entry', 'junior', 'mid', 'senior', 'lead', 'executive'];
 const jobCategories = ['IT', 'Finance', 'Marketing', 'Sales', 'HR', 'Operations', 'Design', 'Data Science', 'Product', 'Engineering'];
@@ -18,49 +17,33 @@ export default function PostJobPage() {
     description: '',
     category: '',
     experienceLevel: '',
-    employmentType: 'Full-time',
-    location: {
-      city: '',
-      state: '',
-      country: '',
-      isRemote: false
-    },
+    companyName: '',
     salaryMin: '',
     salaryMax: '',
+    location: { city: '', state: '', country: '', isRemote: false },
     requiredSkills: [],
-    preferredSkills: [],
-    requirements: [],
     responsibilities: [],
-    benefits: [],
-    companyName: '',
-    deadline: ''
+    requirements: [],
   });
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
-    
+
     if (name.startsWith('location.')) {
-      const field = name.split('.')[1];
-      setFormData(prev => ({
-        ...prev,
-        location: {
-          ...prev.location,
-          [field]: type === 'checkbox' ? checked : value
-        }
+      const key = name.split('.')[1];
+      setFormData(p => ({
+        ...p,
+        location: { ...p.location, [key]: type === 'checkbox' ? checked : value }
       }));
     } else {
-      setFormData(prev => ({
-        ...prev,
-        [name]: type === 'checkbox' ? checked : value
-      }));
+      setFormData(p => ({ ...p, [name]: value }));
     }
   };
 
-  const handleArrayInput = (e, field) => {
-    const value = e.target.value;
-    setFormData(prev => ({
-      ...prev,
-      [field]: value.split('\n').filter(item => item.trim())
+  const handleArray = (e, field) => {
+    setFormData(p => ({
+      ...p,
+      [field]: e.target.value.split('\n').filter(Boolean)
     }));
   };
 
@@ -72,8 +55,8 @@ export default function PostJobPage() {
     try {
       await jobService.createJob(formData);
       router.push('/my-jobs');
-    } catch (err) {
-      setError(err.response?.data?.message || 'Failed to create job');
+    } catch {
+      setError('Failed to create job');
     } finally {
       setLoading(false);
     }
@@ -81,204 +64,147 @@ export default function PostJobPage() {
 
   return (
     <ProtectedRoute allowedRoles={['recruiter']}>
-      <div className="min-h-screen bg-gray-50 py-8">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h1 className="text-3xl font-bold text-gray-900 mb-8">Post a New Job</h1>
+
+      <div className="min-h-screen ai-bg px-6 py-12">
+
+        <div className="max-w-4xl mx-auto">
+
+          <h1 className="text-3xl font-bold mb-10">
+            Create Job Posting
+          </h1>
 
           {error && (
-            <div className="mb-6 p-4 bg-red-100 text-red-800 rounded-md">{error}</div>
+            <div className="glass p-4 mb-6 text-red-400">
+              {error}
+            </div>
           )}
 
-          <form onSubmit={handleSubmit} className="bg-white rounded-lg shadow-md p-8 space-y-6">
-            {/* Basic Info */}
-            <div className="space-y-4">
-              <h2 className="text-xl font-semibold text-gray-900">Basic Information</h2>
-              
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Job Title *</label>
-                <input
-                  type="text"
-                  name="title"
-                  value={formData.title}
+          <form onSubmit={handleSubmit} className="space-y-10">
+
+            {/* BASIC */}
+            <div className="glass p-8 space-y-5">
+              <h2 className="text-xl font-semibold">Basic Information</h2>
+
+              <input
+                name="title"
+                placeholder="Job title"
+                value={formData.title}
+                onChange={handleChange}
+                required
+                className="w-full bg-white/5 border border-white/10 px-4 py-3 rounded-xl focus:outline-none"
+              />
+
+              <textarea
+                name="description"
+                placeholder="Describe the role..."
+                rows="5"
+                value={formData.description}
+                onChange={handleChange}
+                required
+                className="w-full bg-white/5 border border-white/10 px-4 py-3 rounded-xl focus:outline-none"
+              />
+
+              <div className="grid md:grid-cols-2 gap-4">
+                <select
+                  name="category"
+                  value={formData.category}
                   onChange={handleChange}
                   required
-                  className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  placeholder="e.g., Senior React Developer"
-                />
-              </div>
+                  className="bg-white/5 border border-white/10 px-4 py-3 rounded-xl"
+                >
+                  <option value="">Category</option>
+                  {jobCategories.map(c => (
+                    <option key={c} value={c}>{c}</option>
+                  ))}
+                </select>
 
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Job Description *</label>
-                <textarea
-                  name="description"
-                  value={formData.description}
+                <select
+                  name="experienceLevel"
+                  value={formData.experienceLevel}
                   onChange={handleChange}
                   required
-                  rows="6"
-                  className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  placeholder="Provide detailed description about the role..."
-                />
+                  className="bg-white/5 border border-white/10 px-4 py-3 rounded-xl"
+                >
+                  <option value="">Experience</option>
+                  {experienceLevels.map(l => (
+                    <option key={l} value={l}>{l}</option>
+                  ))}
+                </select>
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Category *</label>
-                  <select
-                    name="category"
-                    value={formData.category}
-                    onChange={handleChange}
-                    required
-                    className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  >
-                    <option value="">Select category...</option>
-                    {jobCategories.map(cat => (
-                      <option key={cat} value={cat}>{cat}</option>
-                    ))}
-                  </select>
-                </div>
-
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Experience Level *</label>
-                  <select
-                    name="experienceLevel"
-                    value={formData.experienceLevel}
-                    onChange={handleChange}
-                    required
-                    className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  >
-                    <option value="">Select level...</option>
-                    {experienceLevels.map(level => (
-                      <option key={level} value={level}>{level.charAt(0).toUpperCase() + level.slice(1)}</option>
-                    ))}
-                  </select>
-                </div>
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Company Name</label>
-                <input
-                  type="text"
-                  name="companyName"
-                  value={formData.companyName}
-                  onChange={handleChange}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                />
-              </div>
+              <input
+                name="companyName"
+                placeholder="Company name"
+                value={formData.companyName}
+                onChange={handleChange}
+                className="w-full bg-white/5 border border-white/10 px-4 py-3 rounded-xl"
+              />
             </div>
 
-            {/* Location & Salary */}
-            <div className="space-y-4 border-t pt-6">
-              <h2 className="text-xl font-semibold text-gray-900">Location & Compensation</h2>
-              
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                <input
-                  type="text"
-                  name="location.city"
-                  value={formData.location.city}
-                  onChange={handleChange}
-                  placeholder="City"
-                  className="px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                />
-                <input
-                  type="text"
-                  name="location.state"
-                  value={formData.location.state}
-                  onChange={handleChange}
-                  placeholder="State/Province"
-                  className="px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                />
-                <input
-                  type="text"
-                  name="location.country"
-                  value={formData.location.country}
-                  onChange={handleChange}
-                  placeholder="Country"
-                  className="px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                />
+            {/* LOCATION + SALARY */}
+            <div className="glass p-8 space-y-5">
+              <h2 className="text-xl font-semibold">Location & Salary</h2>
+
+              <div className="grid md:grid-cols-3 gap-4">
+                <input name="location.city" placeholder="City" onChange={handleChange} className="bg-white/5 border border-white/10 px-4 py-3 rounded-xl" />
+                <input name="location.state" placeholder="State" onChange={handleChange} className="bg-white/5 border border-white/10 px-4 py-3 rounded-xl" />
+                <input name="location.country" placeholder="Country" onChange={handleChange} className="bg-white/5 border border-white/10 px-4 py-3 rounded-xl" />
               </div>
 
-              <div className="flex items-center">
+              <div className="flex items-center gap-2 text-sm muted">
                 <input
                   type="checkbox"
                   name="location.isRemote"
                   checked={formData.location.isRemote}
                   onChange={handleChange}
-                  className="h-4 w-4 text-blue-600"
                 />
-                <label className="ml-2 text-sm text-gray-700">This is a remote position</label>
+                Remote position
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <input
-                  type="number"
-                  name="salaryMin"
-                  value={formData.salaryMin}
-                  onChange={handleChange}
-                  placeholder="Min Salary"
-                  className="px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                />
-                <input
-                  type="number"
-                  name="salaryMax"
-                  value={formData.salaryMax}
-                  onChange={handleChange}
-                  placeholder="Max Salary"
-                  className="px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                />
+              <div className="grid md:grid-cols-2 gap-4">
+                <input name="salaryMin" placeholder="Min salary" onChange={handleChange} className="bg-white/5 border border-white/10 px-4 py-3 rounded-xl" />
+                <input name="salaryMax" placeholder="Max salary" onChange={handleChange} className="bg-white/5 border border-white/10 px-4 py-3 rounded-xl" />
               </div>
             </div>
 
-            {/* Skills & Requirements */}
-            <div className="space-y-4 border-t pt-6">
-              <h2 className="text-xl font-semibold text-gray-900">Requirements & Skills</h2>
-              
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Required Skills (one per line)</label>
-                <textarea
-                  value={formData.requiredSkills.join('\n')}
-                  onChange={(e) => handleArrayInput(e, 'requiredSkills')}
-                  rows="3"
-                  className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  placeholder="React&#10;Node.js&#10;MongoDB"
-                />
-              </div>
+            {/* REQUIREMENTS */}
+            <div className="glass p-8 space-y-5">
+              <h2 className="text-xl font-semibold">Requirements</h2>
 
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Responsibilities (one per line)</label>
-                <textarea
-                  value={formData.responsibilities.join('\n')}
-                  onChange={(e) => handleArrayInput(e, 'responsibilities')}
-                  rows="3"
-                  className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  placeholder="Develop responsive web applications&#10;Collaborate with design team"
-                />
-              </div>
+              <textarea
+                rows="3"
+                placeholder="Required skills (one per line)"
+                onChange={(e) => handleArray(e, 'requiredSkills')}
+                className="w-full bg-white/5 border border-white/10 px-4 py-3 rounded-xl"
+              />
 
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Requirements (one per line)</label>
-                <textarea
-                  value={formData.requirements.join('\n')}
-                  onChange={(e) => handleArrayInput(e, 'requirements')}
-                  rows="3"
-                  className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  placeholder="3+ years experience&#10;Strong JavaScript knowledge"
-                />
-              </div>
+              <textarea
+                rows="3"
+                placeholder="Responsibilities (one per line)"
+                onChange={(e) => handleArray(e, 'responsibilities')}
+                className="w-full bg-white/5 border border-white/10 px-4 py-3 rounded-xl"
+              />
+
+              <textarea
+                rows="3"
+                placeholder="Requirements (one per line)"
+                onChange={(e) => handleArray(e, 'requirements')}
+                className="w-full bg-white/5 border border-white/10 px-4 py-3 rounded-xl"
+              />
             </div>
 
-            {/* Submit */}
-            <div className="border-t pt-6">
-              <button
-                type="submit"
-                disabled={loading}
-                className="w-full bg-blue-600 text-white py-3 rounded-md hover:bg-blue-700 font-semibold disabled:opacity-50"
-              >
-                {loading ? 'Posting Job...' : 'Post Job'}
-              </button>
-            </div>
+            {/* SUBMIT */}
+            <button
+              disabled={loading}
+              className="w-full py-4 rounded-xl bg-indigo-600 hover:bg-indigo-700 font-semibold transition disabled:opacity-50"
+            >
+              {loading ? 'Posting job...' : 'Publish Job'}
+            </button>
+
           </form>
         </div>
       </div>
+
     </ProtectedRoute>
   );
 }

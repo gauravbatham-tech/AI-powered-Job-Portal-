@@ -10,9 +10,12 @@ export default function RootLayout({ children }) {
       <body>
         <AuthProvider>
           <Navbar />
-          {children}
+          <div className="pt-20">
+            {children}
+          </div>
         </AuthProvider>
       </body>
     </html>
   );
 }
+

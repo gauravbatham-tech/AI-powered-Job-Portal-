@@ -10,163 +10,139 @@ export default function Home() {
   const router = useRouter();
 
   useEffect(() => {
-    if (user) {
-      router.push('/dashboard');
-    }
+    if (user) router.push('/dashboard');
   }, [user, router]);
 
   return (
-    <div className="min-h-screen bg-linear-to-br from-blue-50 to-indigo-100">
-      {/* Hero Section */}
-      <section className="px-4 py-16 sm:px-6 lg:px-8 lg:py-24">
-        <div className="mx-auto max-w-4xl text-center">
-          <h1 className="text-5xl font-bold text-gray-900 mb-6">
-            Find Your Dream Job Today
-          </h1>
-          <p className="text-xl text-gray-600 mb-8">
-            Connect with top employers and advance your career with our AI-powered job portal. 
-            Smart resume matching helps you find opportunities that fit your skills perfectly.
+    <div className="min-h-screen ai-bg">
+
+      {/* HERO */}
+      <section className="px-6 py-32 text-center max-w-6xl mx-auto">
+        <h1 className="text-5xl md:text-6xl font-extrabold leading-tight mb-6">
+          Jobs shouldn’t be guessed. <br />
+          <span className="gradient-text">They should be predicted.</span>
+        </h1>
+
+        <p className="text-xl muted max-w-3xl mx-auto mb-10">
+          Our AI reads your resume, understands your skills, and shows jobs where you
+          actually have a chance — before you waste time applying.
+        </p>
+
+        <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <Link
+            href="/register"
+            className="px-10 py-4 bg-indigo-600 text-white rounded-xl font-semibold hover:bg-indigo-700 transition"
+          >
+            Let AI Analyze Me
+          </Link>
+
+          <Link
+            href="/jobs"
+            className="px-10 py-4 border border-indigo-400 text-indigo-300 rounded-xl font-semibold hover:bg-white/5 transition"
+          >
+            Explore Smart Jobs
+          </Link>
+        </div>
+
+        <div className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-6 text-sm muted">
+          <div>🧠 Resume Intelligence</div>
+          <div>🎯 Match Score</div>
+          <div>📊 Skill Gap AI</div>
+          <div>🚀 Career Mapping</div>
+        </div>
+      </section>
+
+      {/* PROBLEM */}
+      <section className="py-24 px-6">
+        <div className="max-w-5xl mx-auto glass p-12">
+          <h2 className="text-4xl font-bold text-center mb-12">
+            The job system is broken.
+          </h2>
+
+          <div className="grid md:grid-cols-2 gap-8 text-left muted">
+            <div>❌ 100 applications. Zero replies.</div>
+            <div>❌ No idea why you’re rejected.</div>
+            <div>❌ Same resume everywhere.</div>
+            <div>❌ Keyword-based fake matching.</div>
+          </div>
+
+          <p className="mt-12 text-center text-indigo-400 font-semibold text-xl">
+            This isn’t another job portal.  
+            It’s an AI career decision engine.
           </p>
-          
-          <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
-            <Link
-              href="/register"
-              className="px-8 py-4 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-700 transition"
-            >
-              Get Started
-            </Link>
-            <Link
-              href="/login"
-              className="px-8 py-4 bg-white text-blue-600 border-2 border-blue-600 rounded-lg font-semibold hover:bg-blue-50 transition"
-            >
-              Sign In
-            </Link>
-          </div>
         </div>
       </section>
 
-      {/* Features Section */}
-      <section className="px-4 py-16 sm:px-6 lg:px-8 bg-white">
-        <div className="mx-auto max-w-4xl">
-          <h2 className="text-3xl font-bold text-center text-gray-900 mb-12">
-            Why Choose JobPortal?
+      {/* FEATURES */}
+      <section className="py-24 px-6">
+        <div className="max-w-6xl mx-auto grid md:grid-cols-4 gap-8">
+          {[
+            ['🧠 Resume Intelligence', 'Understands context, not keywords.'],
+            ['🎯 Fit Probability', 'Know your chances before applying.'],
+            ['📊 Skill Gap AI', 'See what’s missing clearly.'],
+            ['🚀 Career Direction', 'Discover what role you’re growing into.'],
+          ].map(([title, desc]) => (
+            <div key={title} className="glass glass-hover p-8">
+              <h3 className="font-bold text-lg mb-2">{title}</h3>
+              <p className="muted">{desc}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* HOW IT WORKS */}
+      <section className="py-24 px-6">
+        <div className="max-w-4xl mx-auto glass p-12 space-y-10">
+          <h2 className="text-4xl font-bold text-center mb-10">
+            How it works
           </h2>
-          
-          <div className="grid md:grid-cols-3 gap-8">
-            {/* Feature 1 */}
-            <div className="text-center">
-              <div className="flex justify-center mb-4">
-                <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center">
-                  <span className="text-2xl">🤖</span>
-                </div>
-              </div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-2">AI Matching</h3>
-              <p className="text-gray-600">
-                Our AI analyzes your resume and matches you with jobs that fit your skills and experience perfectly.
-              </p>
-            </div>
 
-            {/* Feature 2 */}
-            <div className="text-center">
-              <div className="flex justify-center mb-4">
-                <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center">
-                  <span className="text-2xl">📄</span>
-                </div>
+          {[
+            'Upload resume — AI builds your profile.',
+            'System analyzes skills and experience.',
+            'You see only relevant opportunities.',
+            'Apply with confidence — no guessing.',
+          ].map((text, i) => (
+            <div key={i} className="flex gap-6 items-start">
+              <div className="w-12 h-12 rounded-full bg-indigo-600 flex items-center justify-center font-bold">
+                {i + 1}
               </div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-2">Resume Parser</h3>
-              <p className="text-gray-600">
-                Upload your resume once and it automatically extracts your skills, experience, and qualifications.
-              </p>
+              <p className="text-lg muted">{text}</p>
             </div>
-
-            {/* Feature 3 */}
-            <div className="text-center">
-              <div className="flex justify-center mb-4">
-                <div className="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center">
-                  <span className="text-2xl">📊</span>
-                </div>
-              </div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-2">Track Progress</h3>
-              <p className="text-gray-600">
-                Monitor your applications, interview schedules, and get real-time updates from recruiters.
-              </p>
-            </div>
-          </div>
+          ))}
         </div>
       </section>
 
-      {/* How It Works Section */}
-      <section className="px-4 py-16 sm:px-6 lg:px-8 bg-gray-50">
-        <div className="mx-auto max-w-4xl">
-          <h2 className="text-3xl font-bold text-center text-gray-900 mb-12">
-            How It Works
+      {/* CTA */}
+      <section className="py-32 text-center relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-br from-indigo-600 via-violet-600 to-purple-700 opacity-90"></div>
+
+        <div className="relative z-10 max-w-4xl mx-auto px-6">
+          <h2 className="text-4xl font-bold mb-6">
+            Stop chasing jobs.
           </h2>
-          
-          <div className="space-y-8">
-            <div className="flex gap-6">
-              <div className="shrink-0 w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center text-white font-bold">
-                1
-              </div>
-              <div>
-                <h3 className="text-lg font-semibold text-gray-900">Create Your Profile</h3>
-                <p className="text-gray-600 mt-2">Sign up and build your professional profile with your skills and experience.</p>
-              </div>
-            </div>
+          <p className="text-xl mb-10">
+            Let your skills attract the right ones.
+          </p>
 
-            <div className="flex gap-6">
-              <div className="shrink-0 w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center text-white font-bold">
-                2
-              </div>
-              <div>
-                <h3 className="text-lg font-semibold text-gray-900">Upload Your Resume</h3>
-                <p className="text-gray-600 mt-2">Upload your resume and our AI parser automatically extracts your qualifications.</p>
-              </div>
-            </div>
-
-            <div className="flex gap-6">
-              <div className="shrink-0 w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center text-white font-bold">
-                3
-              </div>
-              <div>
-                <h3 className="text-lg font-semibold text-gray-900">Browse & Apply</h3>
-                <p className="text-gray-600 mt-2">Browse jobs and apply with AI-powered matching scores showing your fit.</p>
-              </div>
-            </div>
-
-            <div className="flex gap-6">
-              <div className="shrink-0 w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center text-white font-bold">
-                4
-              </div>
-              <div>
-                <h3 className="text-lg font-semibold text-gray-900">Get Hired</h3>
-                <p className="text-gray-600 mt-2">Track your applications, schedule interviews, and land your dream job!</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* CTA Section */}
-      <section className="px-4 py-16 sm:px-6 lg:px-8 bg-blue-600 text-white">
-        <div className="mx-auto max-w-4xl text-center">
-          <h2 className="text-3xl font-bold mb-6">Ready to Start Your Journey?</h2>
-          <p className="text-lg mb-8">Join thousands of job seekers and find your perfect match today.</p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
               href="/register"
-              className="px-8 py-4 bg-white text-blue-600 rounded-lg font-semibold hover:bg-gray-100 transition"
+              className="px-10 py-4 bg-white text-indigo-700 rounded-xl font-semibold hover:bg-gray-100 transition"
             >
-              Sign Up Now
+              Start Free With AI
             </Link>
+
             <Link
               href="/jobs"
-              className="px-8 py-4 bg-blue-700 text-white border-2 border-white rounded-lg font-semibold hover:bg-blue-800 transition"
+              className="px-10 py-4 border border-white rounded-xl font-semibold hover:bg-white/10 transition"
             >
-              Browse Jobs
+              View Smart Jobs
             </Link>
           </div>
         </div>
       </section>
+
     </div>
   );
 }

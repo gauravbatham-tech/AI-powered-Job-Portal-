@@ -1,56 +1,63 @@
 import Link from 'next/link';
 
 export default function JobCard({ job }) {
-  const matchingScore = job.matchingScore || 'N/A';
-  
+  const score = job.matchingScore;
+
   return (
-    <div className="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow p-6">
+    <div className="glass glass-hover p-6">
+
+      {/* HEADER */}
       <div className="flex justify-between items-start mb-4">
         <div>
-          <h3 className="text-lg font-semibold text-gray-900 hover:text-blue-600">
-            <Link href={`/jobs/${job.id}`}>
-              {job.title}
-            </Link>
-          </h3>
-          <p className="text-sm text-gray-600">{job.companyName}</p>
+          <Link
+            href={`/jobs/${job.id}`}
+            className="text-lg font-semibold hover:text-indigo-400 transition"
+          >
+            {job.title}
+          </Link>
+          <p className="text-sm muted">{job.companyName}</p>
         </div>
-        {matchingScore !== 'N/A' && (
-          <div className="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-semibold">
-            {matchingScore}% Match
+
+        {score && (
+          <div className="px-3 py-1 rounded-full text-xs font-bold bg-indigo-500/10 text-indigo-300 border border-indigo-400/30">
+            {score}% Match
           </div>
         )}
       </div>
 
-      <div className="mb-4">
-        <p className="text-sm text-gray-600 line-clamp-2">{job.description}</p>
-      </div>
+      {/* DESCRIPTION */}
+      <p className="text-sm muted line-clamp-2 mb-5">
+        {job.description}
+      </p>
 
-      <div className="flex flex-wrap gap-2 mb-4">
-        <span className="inline-block bg-gray-100 text-gray-800 text-xs px-2 py-1 rounded">
+      {/* TAGS */}
+      <div className="flex flex-wrap gap-2 mb-5">
+        <span className="px-2 py-1 text-xs rounded bg-white/5 border border-white/10">
           {job.experienceLevel}
         </span>
-        <span className="inline-block bg-gray-100 text-gray-800 text-xs px-2 py-1 rounded">
+        <span className="px-2 py-1 text-xs rounded bg-white/5 border border-white/10">
           {job.location?.city || 'Remote'}
         </span>
       </div>
 
-      <div className="border-t pt-4">
-        <div className="flex justify-between items-center">
-          <div>
-            {job.salaryMin && job.salaryMax && (
-              <p className="text-sm font-semibold text-gray-900">
-                ${job.salaryMin.toLocaleString()} - ${job.salaryMax.toLocaleString()}
-              </p>
-            )}
-          </div>
-          <Link 
-            href={`/jobs/${job.id}`}
-            className="text-blue-600 hover:text-blue-700 font-semibold text-sm"
-          >
-            View Details →
-          </Link>
+      {/* FOOTER */}
+      <div className="flex justify-between items-center border-t border-white/10 pt-4">
+        <div className="text-sm font-semibold">
+          {job.salaryMin && job.salaryMax && (
+            <>
+              ₹{job.salaryMin.toLocaleString()} – ₹{job.salaryMax.toLocaleString()}
+            </>
+          )}
         </div>
+
+        <Link
+          href={`/jobs/${job.id}`}
+          className="text-indigo-400 hover:text-indigo-300 font-semibold text-sm"
+        >
+          View →
+        </Link>
       </div>
+
     </div>
   );
 }
