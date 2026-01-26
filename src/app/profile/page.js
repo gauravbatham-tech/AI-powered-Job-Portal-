@@ -49,7 +49,7 @@ export default function ProfilePage() {
   if (loading) {
     return (
       <ProtectedRoute>
-        <div className="min-h-screen ai-bg flex items-center justify-center muted">
+        <div className="min-h-screen ai-bg flex items-center justify-center muted text-sm sm:text-base">
           Loading...
         </div>
       </ProtectedRoute>
@@ -59,22 +59,22 @@ export default function ProfilePage() {
   return (
     <ProtectedRoute>
 
-      <div className="min-h-screen ai-bg px-6 py-12">
+      <div className="min-h-screen ai-bg px-4 sm:px-6 py-6 sm:py-12">
 
         <div className="max-w-4xl mx-auto">
 
           {/* HEADER */}
-          <div className="glass p-8 mb-10 flex justify-between items-center">
-            <div>
-              <h1 className="text-3xl font-bold">My Profile</h1>
-              <p className="muted text-sm">
+          <div className="glass p-4 sm:p-6 lg:p-8 mb-6 sm:mb-10 flex flex-col sm:flex-row justify-between sm:items-start gap-4">
+            <div className="min-w-0">
+              <h1 className="text-2xl sm:text-3xl font-bold">My Profile</h1>
+              <p className="muted text-xs sm:text-sm">
                 Manage your professional identity
               </p>
             </div>
 
             <button
               onClick={() => setEditing(!editing)}
-              className="px-5 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-700 font-semibold"
+              className="px-4 sm:px-5 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-700 font-semibold text-sm sm:text-base flex-shrink-0"
             >
               {editing ? 'Cancel' : 'Edit'}
             </button>
@@ -82,29 +82,29 @@ export default function ProfilePage() {
 
           {/* MESSAGES */}
           {error && (
-            <div className="glass p-4 mb-6 text-red-400">
+            <div className="glass p-4 mb-6 text-red-400 text-xs sm:text-sm rounded-xl">
               {error}
             </div>
           )}
 
           {success && (
-            <div className="glass p-4 mb-6 text-green-400">
+            <div className="glass p-4 mb-6 text-green-400 text-xs sm:text-sm rounded-xl">
               {success}
             </div>
           )}
 
           {/* BASIC INFO */}
-          <div className="glass p-8 mb-8 space-y-5">
-            <h2 className="text-xl font-semibold">Basic Information</h2>
+          <div className="glass p-4 sm:p-6 lg:p-8 mb-6 sm:mb-8 space-y-4 sm:space-y-5">
+            <h2 className="text-lg sm:text-xl font-semibold">Basic Information</h2>
 
-            <div className="grid md:grid-cols-2 gap-4">
+            <div className="grid sm:grid-cols-2 gap-3 sm:gap-4">
               <input
                 name="firstName"
                 value={profileData?.firstName || ''}
                 onChange={handleChange}
                 disabled={!editing}
                 placeholder="First name"
-                className="bg-white/5 border border-white/10 px-4 py-3 rounded-xl disabled:opacity-50"
+                className="bg-white/5 border border-white/10 px-3 sm:px-4 py-2 sm:py-3 rounded-xl disabled:opacity-50 focus:outline-none focus:border-indigo-400 text-sm sm:text-base"
               />
 
               <input
@@ -113,20 +113,20 @@ export default function ProfilePage() {
                 onChange={handleChange}
                 disabled={!editing}
                 placeholder="Last name"
-                className="bg-white/5 border border-white/10 px-4 py-3 rounded-xl disabled:opacity-50"
+                className="bg-white/5 border border-white/10 px-3 sm:px-4 py-2 sm:py-3 rounded-xl disabled:opacity-50 focus:outline-none focus:border-indigo-400 text-sm sm:text-base"
               />
             </div>
           </div>
 
           {/* CONTACT */}
-          <div className="glass p-8 mb-8 space-y-5">
-            <h2 className="text-xl font-semibold">Contact</h2>
+          <div className="glass p-4 sm:p-6 lg:p-8 mb-6 sm:mb-8 space-y-4 sm:space-y-5">
+            <h2 className="text-lg sm:text-xl font-semibold">Contact</h2>
 
-            <div className="grid md:grid-cols-2 gap-4">
+            <div className="grid sm:grid-cols-2 gap-3 sm:gap-4">
               <input
                 value={profileData?.email || ''}
                 disabled
-                className="bg-white/5 border border-white/10 px-4 py-3 rounded-xl opacity-50"
+                className="bg-white/5 border border-white/10 px-3 sm:px-4 py-2 sm:py-3 rounded-xl opacity-50 text-sm sm:text-base"
               />
 
               <input
@@ -135,15 +135,15 @@ export default function ProfilePage() {
                 onChange={handleChange}
                 disabled={!editing}
                 placeholder="Phone number"
-                className="bg-white/5 border border-white/10 px-4 py-3 rounded-xl disabled:opacity-50"
+                className="bg-white/5 border border-white/10 px-3 sm:px-4 py-2 sm:py-3 rounded-xl disabled:opacity-50 focus:outline-none focus:border-indigo-400 text-sm sm:text-base"
               />
             </div>
           </div>
 
           {/* CANDIDATE INFO */}
           {profileData?.role === 'candidate' && (
-            <div className="glass p-8 space-y-5 mb-8">
-              <h2 className="text-xl font-semibold">Professional Profile</h2>
+            <div className="glass p-4 sm:p-6 lg:p-8 space-y-4 sm:space-y-5 mb-6 sm:mb-8">
+              <h2 className="text-lg sm:text-xl font-semibold">Professional Profile</h2>
 
               <input
                 name="headline"
@@ -151,17 +151,17 @@ export default function ProfilePage() {
                 onChange={handleChange}
                 disabled={!editing}
                 placeholder="Professional headline"
-                className="bg-white/5 border border-white/10 px-4 py-3 rounded-xl disabled:opacity-50"
+                className="w-full bg-white/5 border border-white/10 px-3 sm:px-4 py-2 sm:py-3 rounded-xl disabled:opacity-50 focus:outline-none focus:border-indigo-400 text-sm sm:text-base"
               />
 
               <textarea
                 name="bio"
-                rows="4"
+                rows="3"
                 value={profileData?.bio || ''}
                 onChange={handleChange}
                 disabled={!editing}
                 placeholder="Short bio"
-                className="bg-white/5 border border-white/10 px-4 py-3 rounded-xl disabled:opacity-50"
+                className="w-full bg-white/5 border border-white/10 px-3 sm:px-4 py-2 sm:py-3 rounded-xl disabled:opacity-50 focus:outline-none focus:border-indigo-400 text-sm sm:text-base"
               />
 
               <input
@@ -170,7 +170,7 @@ export default function ProfilePage() {
                 onChange={handleChange}
                 disabled={!editing}
                 placeholder="Location"
-                className="bg-white/5 border border-white/10 px-4 py-3 rounded-xl disabled:opacity-50"
+                className="w-full bg-white/5 border border-white/10 px-3 sm:px-4 py-2 sm:py-3 rounded-xl disabled:opacity-50 focus:outline-none focus:border-indigo-400 text-sm sm:text-base"
               />
 
               <input
@@ -183,7 +183,7 @@ export default function ProfilePage() {
                 }
                 disabled={!editing}
                 placeholder="Skills (comma separated)"
-                className="bg-white/5 border border-white/10 px-4 py-3 rounded-xl disabled:opacity-50"
+                className="w-full bg-white/5 border border-white/10 px-3 sm:px-4 py-2 sm:py-3 rounded-xl disabled:opacity-50 focus:outline-none focus:border-indigo-400 text-sm sm:text-base"
               />
             </div>
           )}
@@ -193,7 +193,7 @@ export default function ProfilePage() {
             <button
               onClick={handleSave}
               disabled={saving}
-              className="w-full py-4 rounded-xl bg-indigo-600 hover:bg-indigo-700 font-semibold disabled:opacity-50"
+              className="w-full py-3 sm:py-4 rounded-xl bg-indigo-600 hover:bg-indigo-700 font-semibold disabled:opacity-50 transition text-sm sm:text-base"
             >
               {saving ? 'Saving...' : 'Save Changes'}
             </button>

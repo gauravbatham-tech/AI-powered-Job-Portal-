@@ -31,26 +31,26 @@ export default function DashboardPage() {
   return (
     <ProtectedRoute>
 
-      <div className="min-h-screen ai-bg px-6 py-10">
+      <div className="min-h-screen ai-bg px-4 sm:px-6 py-6 sm:py-10">
 
         <div className="max-w-7xl mx-auto">
 
           {/* HEADER */}
-          <div className="glass p-8 mb-10 flex justify-between items-center">
-            <div>
-              <h1 className="text-3xl font-bold">
+          <div className="glass p-4 sm:p-6 lg:p-8 mb-6 sm:mb-10 flex flex-col sm:flex-row justify-between sm:items-center gap-4 sm:gap-6">
+            <div className="min-w-0">
+              <h1 className="text-xl sm:text-2xl lg:text-3xl font-bold truncate">
                 Welcome back, {user?.firstName}
               </h1>
-              <p className="muted text-sm capitalize">
+              <p className="muted text-xs sm:text-sm capitalize">
                 Role: {user?.role}
               </p>
             </div>
 
             {/* AI SCORE */}
             {user?.role === 'candidate' && (
-              <div className="hidden sm:flex flex-col text-right">
-                <span className="text-sm muted">AI Profile Score</span>
-                <span className="text-2xl font-bold text-indigo-400">
+              <div className="flex sm:flex-col text-right flex-shrink-0">
+                <span className="text-xs sm:text-sm muted">AI Profile Score</span>
+                <span className="text-lg sm:text-2xl font-bold text-indigo-400 sm:ml-0 ml-auto">
                   78%
                 </span>
               </div>
@@ -58,61 +58,61 @@ export default function DashboardPage() {
           </div>
 
           {/* QUICK ACTIONS */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 mb-8 sm:mb-12">
 
             {user?.role === 'candidate' && (
               <>
-                <Link href="/jobs" className="glass glass-hover p-6">
-                  <h3 className="font-semibold mb-1">Browse Jobs</h3>
-                  <p className="muted text-sm">AI-matched opportunities</p>
+                <Link href="/jobs" className="glass glass-hover p-4 sm:p-6">
+                  <h3 className="font-semibold mb-1 text-sm sm:text-base">Browse Jobs</h3>
+                  <p className="muted text-xs sm:text-sm">AI-matched opportunities</p>
                 </Link>
 
-                <Link href="/applications" className="glass glass-hover p-6">
-                  <h3 className="font-semibold mb-1">My Applications</h3>
-                  <p className="muted text-sm">Track hiring progress</p>
+                <Link href="/applications" className="glass glass-hover p-4 sm:p-6">
+                  <h3 className="font-semibold mb-1 text-sm sm:text-base">My Applications</h3>
+                  <p className="muted text-xs sm:text-sm">Track hiring progress</p>
                 </Link>
 
-                <Link href="/profile" className="glass glass-hover p-6">
-                  <h3 className="font-semibold mb-1">Profile</h3>
-                  <p className="muted text-sm">Improve AI score</p>
+                <Link href="/profile" className="glass glass-hover p-4 sm:p-6">
+                  <h3 className="font-semibold mb-1 text-sm sm:text-base">Profile</h3>
+                  <p className="muted text-xs sm:text-sm">Improve AI score</p>
                 </Link>
               </>
             )}
 
             {user?.role === 'recruiter' && (
               <>
-                <Link href="/post-job" className="glass glass-hover p-6">
-                  <h3 className="font-semibold mb-1">Post Job</h3>
-                  <p className="muted text-sm">Create new opening</p>
+                <Link href="/post-job" className="glass glass-hover p-4 sm:p-6">
+                  <h3 className="font-semibold mb-1 text-sm sm:text-base">Post Job</h3>
+                  <p className="muted text-xs sm:text-sm">Create new opening</p>
                 </Link>
 
-                <Link href="/my-jobs" className="glass glass-hover p-6">
-                  <h3 className="font-semibold mb-1">My Jobs</h3>
-                  <p className="muted text-sm">Manage listings</p>
+                <Link href="/my-jobs" className="glass glass-hover p-4 sm:p-6">
+                  <h3 className="font-semibold mb-1 text-sm sm:text-base">My Jobs</h3>
+                  <p className="muted text-xs sm:text-sm">Manage listings</p>
                 </Link>
 
-                <Link href="/applications" className="glass glass-hover p-6">
-                  <h3 className="font-semibold mb-1">Applications</h3>
-                  <p className="muted text-sm">Review candidates</p>
+                <Link href="/applications" className="glass glass-hover p-4 sm:p-6">
+                  <h3 className="font-semibold mb-1 text-sm sm:text-base">Applications</h3>
+                  <p className="muted text-xs sm:text-sm">Review candidates</p>
                 </Link>
               </>
             )}
 
             {user?.role === 'admin' && (
               <>
-                <Link href="/admin/stats" className="glass glass-hover p-6">
-                  <h3 className="font-semibold mb-1">Platform Stats</h3>
-                  <p className="muted text-sm">Analytics overview</p>
+                <Link href="/admin/stats" className="glass glass-hover p-4 sm:p-6">
+                  <h3 className="font-semibold mb-1 text-sm sm:text-base">Platform Stats</h3>
+                  <p className="muted text-xs sm:text-sm">Analytics overview</p>
                 </Link>
 
-                <Link href="/admin/users" className="glass glass-hover p-6">
-                  <h3 className="font-semibold mb-1">Users</h3>
-                  <p className="muted text-sm">Manage accounts</p>
+                <Link href="/admin/users" className="glass glass-hover p-4 sm:p-6">
+                  <h3 className="font-semibold mb-1 text-sm sm:text-base">Users</h3>
+                  <p className="muted text-xs sm:text-sm">Manage accounts</p>
                 </Link>
 
-                <Link href="/admin/jobs" className="glass glass-hover p-6">
-                  <h3 className="font-semibold mb-1">Jobs</h3>
-                  <p className="muted text-sm">Moderation</p>
+                <Link href="/admin/jobs" className="glass glass-hover p-4 sm:p-6">
+                  <h3 className="font-semibold mb-1 text-sm sm:text-base">Jobs</h3>
+                  <p className="muted text-xs sm:text-sm">Moderation</p>
                 </Link>
               </>
             )}
@@ -120,34 +120,34 @@ export default function DashboardPage() {
 
           {/* FEATURED JOBS */}
           <div>
-            <h2 className="text-2xl font-bold mb-6">
+            <h2 className="text-xl sm:text-2xl font-bold mb-4 sm:mb-6">
               Recommended Jobs
             </h2>
 
             {jobsLoading && (
-              <div className="glass p-12 text-center muted">
+              <div className="glass p-8 sm:p-12 text-center muted text-sm sm:text-base">
                 Loading jobs...
               </div>
             )}
 
             {error && (
-              <div className="glass p-12 text-center text-red-400">
+              <div className="glass p-8 sm:p-12 text-center text-red-400 text-sm sm:text-base">
                 {error}
               </div>
             )}
 
             {!jobsLoading && !error && (
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
                 {jobs.map((job) => (
                   <JobCard key={job.id} job={job} />
                 ))}
               </div>
             )}
 
-            <div className="text-center mt-10">
+            <div className="text-center mt-8 sm:mt-10">
               <Link
                 href="/jobs"
-                className="text-indigo-400 hover:text-indigo-300 font-semibold"
+                className="text-indigo-400 hover:text-indigo-300 font-semibold text-sm sm:text-base"
               >
                 View all jobs →
               </Link>
