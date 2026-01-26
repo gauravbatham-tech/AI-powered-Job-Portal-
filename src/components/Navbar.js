@@ -39,12 +39,12 @@ export default function Navbar() {
 
           {!user && (
             <>
-              <Link href="/login" className="text-gray-300 hover:text-white transition">
+              <Link href="/login" className="px-5 py-2 rounded-xl text-white font-semibold hover:text-white hover:bg-indigo-700 transition">
                 Login
               </Link>
               <Link
                 href="/register"
-                className="px-5 py-2 rounded-xl bg-indigo-600 text-white font-semibold hover:bg-indigo-700 transition"
+                className="px-5 py-2 rounded-xl bg-indigo-500 text-white font-semibold hover:bg-indigo-700 transition"
               >
                 Get Started
               </Link>

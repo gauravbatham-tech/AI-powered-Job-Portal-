@@ -31,14 +31,14 @@ export default function Home() {
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <Link
             href="/register"
-            className="px-10 py-4 bg-indigo-600 text-white rounded-xl font-semibold hover:bg-indigo-700 transition"
+            className="px-10 py-4 bg-indigo-500 text-white rounded-xl font-semibold hover:bg-indigo-800 transition"
           >
-            Let AI Analyze Me
+            Let AI Analyze You 
           </Link>
 
           <Link
             href="/jobs"
-            className="px-10 py-4 border border-indigo-400 text-indigo-300 rounded-xl font-semibold hover:bg-indigo-600 hover:text-white transition"
+            className="px-10 py-4 border-indigo-400 text-indigo-300 rounded-xl font-semibold hover:bg-indigo-600 hover:text-white transition"
           >
             Explore Smart Jobs
           </Link>
@@ -128,14 +128,14 @@ export default function Home() {
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
               href="/register"
-              className="px-10 py-4 bg-white text-indigo-700 rounded-xl font-semibold hover:bg-gray-100 transition"
+              className="px-10 py-4 bg-white text-indigo-700 rounded-xl font-semibold hover:bg-gray-300 transition"
             >
               Start Free With AI
             </Link>
 
             <Link
               href="/jobs"
-              className="px-10 py-4 border border-white rounded-xl font-semibold hover:bg-white hover:text-indigo-500"
+              className="px-10 py-4 border-white rounded-xl font-semibold hover:bg-white hover:text-indigo-500"
             >
               View Smart Jobs
             </Link>
