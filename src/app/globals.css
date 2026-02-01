@@ -15,10 +15,22 @@
   --glass-border: rgba(255, 255, 255, 0.12);
 }
 
+/* ===============================
+   LIGHT MODE THEME
+================================ */
+
+html.light {
+  --text-main: #1f2937;
+  --text-muted: #6b7280;
+  --glass-bg: rgba(255, 255, 255, 0.8);
+  --glass-border: rgba(0, 0, 0, 0.1);
+}
+
 html {
   scroll-behavior: smooth;
 }
 
+/* Dark mode (default) */
 body {
   background: #020617;
   color: var(--text-main);
@@ -26,6 +38,13 @@ body {
     "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -webkit-text-size-adjust: 100%;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Light mode body */
+html.light body {
+  background: #f9fafb;
+  color: var(--text-main);
 }
 
 /* ===============================
@@ -52,6 +71,15 @@ h2, h3, h4, h5, h6 {
     linear-gradient(to bottom, #020617, #020617);
   min-height: 100vh;
   width: 100%;
+  transition: background-color 0.3s ease;
+}
+
+/* Light mode background */
+html.light .ai-bg {
+  background:
+    radial-gradient(1200px 600px at 10% -10%, rgba(99,102,241,0.15), transparent 60%),
+    radial-gradient(1000px 500px at 90% 10%, rgba(139,92,246,0.1), transparent 60%),
+    linear-gradient(to bottom, #f9fafb, #f3f4f6);
 }
 
 @media (max-width: 640px) {
@@ -60,6 +88,13 @@ h2, h3, h4, h5, h6 {
       radial-gradient(800px 400px at 10% -10%, rgba(99,102,241,0.25), transparent 60%),
       radial-gradient(600px 300px at 90% 10%, rgba(139,92,246,0.15), transparent 60%),
       linear-gradient(to bottom, #020617, #020617);
+  }
+
+  html.light .ai-bg {
+    background:
+      radial-gradient(800px 400px at 10% -10%, rgba(99,102,241,0.1), transparent 60%),
+      radial-gradient(600px 300px at 90% 10%, rgba(139,92,246,0.08), transparent 60%),
+      linear-gradient(to bottom, #f9fafb, #f3f4f6);
   }
 }
 
@@ -72,6 +107,14 @@ h2, h3, h4, h5, h6 {
   backdrop-filter: blur(14px);
   border: 1px solid var(--glass-border);
   border-radius: 16px;
+  transition: all 0.3s ease;
+}
+
+/* Light mode glass effect */
+html.light .glass {
+  background: rgba(255, 255, 255, 0.75);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.07);
 }
 
 @media (max-width: 640px) {
@@ -89,6 +132,10 @@ h2, h3, h4, h5, h6 {
   box-shadow: 0 20px 50px rgba(0,0,0,0.4);
 }
 
+html.light .glass-hover:hover {
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+}
+
 @media (max-width: 768px) {
   .glass-hover:hover {
     transform: translateY(-3px);
@@ -102,11 +149,12 @@ h2, h3, h4, h5, h6 {
 }
 
 /* ===============================
-   TEXT
+   TEXT UTILITIES
 ================================ */
 
 .muted {
   color: var(--text-muted);
+  transition: color 0.3s ease;
 }
 
 .gradient-text {
@@ -114,6 +162,63 @@ h2, h3, h4, h5, h6 {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+}
+
+html.light .gradient-text {
+  background: linear-gradient(90deg, #4f46e5, #7c3aed);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ===============================
+   INPUT STYLES
+================================ */
+
+input, textarea, select {
+  transition: all 0.3s ease;
+}
+
+html.light input,
+html.light textarea,
+html.light select {
+  background-color: rgba(255, 255, 255, 0.9) !important;
+  border-color: rgba(0, 0, 0, 0.1) !important;
+  color: #1f2937 !important;
+}
+
+html.light input::placeholder,
+html.light textarea::placeholder,
+html.light select::placeholder {
+  color: #9ca3af !important;
+}
+
+html.light input:focus,
+html.light textarea:focus,
+html.light select:focus {
+  border-color: #4f46e5 !important;
+  background-color: white !important;
+}
+
+/* ===============================
+   BUTTON STYLES
+================================ */
+
+button {
+  transition: all 0.3s ease;
+}
+
+/* Indigo buttons in light mode */
+html.light .bg-indigo-500,
+html.light .bg-indigo-600,
+html.light .bg-indigo-700 {
+  background-color: #4f46e5;
+}
+
+html.light .bg-indigo-500:hover,
+html.light .bg-indigo-600:hover,
+html.light .bg-indigo-700:hover {
+  background-color: #4338ca;
 }
 
 /* ===============================
@@ -193,4 +298,50 @@ h2, h3, h4, h5, h6 {
     padding-left: 2rem;
     padding-right: 2rem;
   }
+}
+/* ===============================
+   SCROLLBAR STYLING
+================================ */
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(99, 102, 241, 0.5);
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(99, 102, 241, 0.7);
+}
+
+html.light ::-webkit-scrollbar-thumb {
+  background: rgba(79, 70, 229, 0.3);
+}
+
+html.light ::-webkit-scrollbar-thumb:hover {
+  background: rgba(79, 70, 229, 0.5);
+}
+
+/* ===============================
+   ANIMATION
+================================ */
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.fade-in {
+  animation: fadeIn 0.3s ease-in-out;
 }

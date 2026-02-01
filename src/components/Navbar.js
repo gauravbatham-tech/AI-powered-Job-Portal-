@@ -1,30 +1,41 @@
 'use client';
 
-import { useAuth } from '@/context/AuthContext';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
-import { useState } from 'react';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
+import { useState, useEffect } from 'react';
+import { useTheme } from 'next-themes';
+import { useAuth } from '@/context/AuthContext';
 
 export default function Navbar() {
   const { user, logout } = useAuth();
+  const { theme, setTheme } = useTheme();
   const router = useRouter();
+
+  const [mounted, setMounted] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [userMenuOpen, setUserMenuOpen] = useState(false);
+  const [themeMenuOpen, setThemeMenuOpen] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   const handleLogout = () => {
     logout();
     router.push('/');
-    setMobileMenuOpen(false);
     setUserMenuOpen(false);
+    setMobileMenuOpen(false);
   };
+
+  if (!mounted) return null;
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 backdrop-blur-xl bg-white/5 border-b border-white/10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
 
         {/* LOGO */}
-        <Link href="/" className="flex items-center gap-2 sm:gap-3 flex-shrink-0">
+        <Link href="/" className="flex items-center gap-2">
           <Image
             src="/recruitx-logo.svg"
             alt="RecruitX"
@@ -32,37 +43,57 @@ export default function Navbar() {
             height={28}
             priority
           />
-          <span className="text-lg sm:text-xl font-extrabold tracking-tight gradient-text">
+          <span className="text-xl font-extrabold gradient-text">
             RecruitX
           </span>
         </Link>
 
-        {/* MOBILE MENU BUTTON */}
-        <button
-          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          className="md:hidden p-2 rounded-lg hover:bg-white/10 transition"
-          aria-label="Toggle menu"
-        >
-          <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            {mobileMenuOpen ? (
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-            ) : (
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-            )}
-          </svg>
-        </button>
+        {/* RIGHT */}
+        <div className="flex items-center gap-3">
 
-        {/* DESKTOP RIGHT */}
-        <div className="hidden md:flex items-center gap-4 lg:gap-6 text-sm">
+          {/* THEME */}
+          <div className="relative">
+            <button
+              onClick={() => setThemeMenuOpen(!themeMenuOpen)}
+              className="p-2 rounded-lg hover:bg-white/10 transition"
+            >
+              {theme === 'light' && '☀️'}
+              {theme === 'dark' && '🌙'}
+              {theme === 'system' && '💻'}
+            </button>
+
+            {themeMenuOpen && (
+              <div className="absolute right-0 mt-2 w-40 glass p-2 rounded-lg">
+                <button
+                  onClick={() => setTheme('light')}
+                  className="block w-full px-3 py-2 text-left hover:bg-white/10 rounded"
+                >
+                  ☀️ Light
+                </button>
+                <button
+                  onClick={() => setTheme('dark')}
+                  className="block w-full px-3 py-2 text-left hover:bg-white/10 rounded"
+                >
+                  🌙 Dark
+                </button>
+                <button
+                  onClick={() => setTheme('system')}
+                  className="block w-full px-3 py-2 text-left hover:bg-white/10 rounded"
+                >
+                  💻 System
+                </button>
+              </div>
+            )}
+          </div>
 
           {!user && (
             <>
-              <Link href="/login" className="px-4 lg:px-5 py-2 rounded-xl text-white font-semibold hover:text-white hover:bg-indigo-700 transition">
+              <Link href="/login" className="px-4 py-2 rounded-lg hover:bg-white/10">
                 Login
               </Link>
               <Link
                 href="/register"
-                className="px-4 lg:px-5 py-2 rounded-xl bg-indigo-500 text-white font-semibold hover:bg-indigo-700 transition"
+                className="px-4 py-2 rounded-lg bg-indigo-600 text-white"
               >
                 Get Started
               </Link>
@@ -70,97 +101,37 @@ export default function Navbar() {
           )}
 
           {user && (
-            <>
-              <div className="flex items-center gap-2 px-3 py-1 rounded-full border border-indigo-400/30 bg-indigo-500/10 text-indigo-300 text-xs font-semibold">
-                AI Score
-                <span className="text-white font-bold">78%</span>
-              </div>
+            <div className="relative">
+              <button
+                onClick={() => setUserMenuOpen(!userMenuOpen)}
+                className="flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-white/10"
+              >
+                <div className="w-8 h-8 rounded-full bg-indigo-600 flex items-center justify-center font-bold">
+                  {user.firstName?.charAt(0).toUpperCase()}
+                </div>
+                <span>{user.firstName}</span>
+              </button>
 
-              <div className="relative">
-                <button
-                  onClick={() => setUserMenuOpen(!userMenuOpen)}
-                  className="flex items-center gap-2 lg:gap-3 px-3 py-2 rounded-xl hover:bg-white/10 transition"
-                >
-                  <div className="w-8 lg:w-9 h-8 lg:h-9 rounded-full bg-indigo-600 flex items-center justify-center font-bold text-sm lg:text-base">
-                    {user.firstName?.charAt(0).toUpperCase()}
-                  </div>
-
-                  <span className="text-gray-200">
-                    {user.firstName}
-                  </span>
-                </button>
-
-                {userMenuOpen && (
-                  <div className="absolute right-0 mt-3 w-48 glass p-2 text-sm z-50">
-                    <Link href="/dashboard" className="block px-3 py-2 rounded-lg hover:bg-white/10 transition">
-                      Dashboard
-                    </Link>
-                    <Link href="/profile" className="block px-3 py-2 rounded-lg hover:bg-white/10 transition">
-                      Profile
-                    </Link>
-                    <Link href="/applications" className="block px-3 py-2 rounded-lg hover:bg-white/10 transition">
-                      Applications
-                    </Link>
-                    <button
-                      onClick={handleLogout}
-                      className="w-full text-left px-3 py-2 rounded-lg hover:bg-red-500/10 text-red-400 transition"
-                    >
-                      Logout
-                    </button>
-                  </div>
-                )}
-              </div>
-            </>
+              {userMenuOpen && (
+                <div className="absolute right-0 mt-2 w-48 glass p-2 rounded-lg">
+                  <Link href="/dashboard" className="block px-3 py-2 hover:bg-white/10 rounded">
+                    Dashboard
+                  </Link>
+                  <Link href="/profile" className="block px-3 py-2 hover:bg-white/10 rounded">
+                    Profile
+                  </Link>
+                  <button
+                    onClick={handleLogout}
+                    className="w-full text-left px-3 py-2 hover:bg-red-500/10 text-red-400 rounded"
+                  >
+                    Logout
+                  </button>
+                </div>
+              )}
+            </div>
           )}
-
         </div>
       </div>
-
-      {/* MOBILE MENU */}
-      {mobileMenuOpen && (
-        <div className="md:hidden border-t border-white/10 bg-white/5 backdrop-blur-xl">
-          <div className="px-4 py-4 space-y-3">
-            {!user && (
-              <>
-                <Link 
-                  href="/login" 
-                  className="block px-4 py-2 rounded-lg text-white font-semibold hover:bg-indigo-700 transition text-center"
-                  onClick={() => setMobileMenuOpen(false)}
-                >
-                  Login
-                </Link>
-                <Link
-                  href="/register"
-                  className="block px-4 py-2 rounded-lg bg-indigo-500 text-white font-semibold hover:bg-indigo-700 transition text-center"
-                  onClick={() => setMobileMenuOpen(false)}
-                >
-                  Get Started
-                </Link>
-              </>
-            )}
-
-            {user && (
-              <>
-                <Link href="/dashboard" className="block px-4 py-2 rounded-lg hover:bg-white/10 transition" onClick={() => setMobileMenuOpen(false)}>
-                  Dashboard
-                </Link>
-                <Link href="/profile" className="block px-4 py-2 rounded-lg hover:bg-white/10 transition" onClick={() => setMobileMenuOpen(false)}>
-                  Profile
-                </Link>
-                <Link href="/applications" className="block px-4 py-2 rounded-lg hover:bg-white/10 transition" onClick={() => setMobileMenuOpen(false)}>
-                  Applications
-                </Link>
-                <button
-                  onClick={handleLogout}
-                  className="w-full text-left px-4 py-2 rounded-lg hover:bg-red-500/10 text-red-400 transition"
-                >
-                  Logout
-                </button>
-              </>
-            )}
-          </div>
-        </div>
-      )}
     </nav>
   );
 }

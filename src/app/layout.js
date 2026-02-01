@@ -1,21 +1,21 @@
-'use client';
-
 import "./globals.css";
-import { AuthProvider } from '@/context/AuthContext';
-import Navbar from '@/components/Navbar';
+import Providers from "./providers";
+import Navbar from "@/components/Navbar";
+
+export const metadata = {
+  title: "RecruitX",
+  description: "AI Powered Job Portal",
+};
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
-      <body>
-        <AuthProvider>
+    <html lang="en" suppressHydrationWarning>
+      <body suppressHydrationWarning>
+        <Providers>
           <Navbar />
-          <div className="pt-20">
-            {children}
-          </div>
-        </AuthProvider>
+          {children}
+        </Providers>
       </body>
     </html>
   );
 }
-
