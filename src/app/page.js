@@ -39,7 +39,7 @@ export default function Home() {
             href="/register"
             className="px-6 sm:px-10 py-3 sm:py-4 bg-indigo-600 text-white rounded-xl font-semibold hover:bg-indigo-700 transition text-sm sm:text-base shadow-lg hover:shadow-indigo-500/50"
           >
-            Let AI Analyze You 
+            Let AI Analyze You
           </Link>
 
           <Link
@@ -115,7 +115,7 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="bg-gradient-to-r from-indigo-600/20 to-purple-600/20 border border-indigo-500/30 p-6 rounded-lg text-center">
+          <div className="bg-gradient-to-red from-indigo-600/20 to-purple-600/20 border border-indigo-500/30 p-6 rounded-lg text-center">
             <p className="text-indigo-300 font-semibold text-base sm:text-lg">
               This isn't another job portal. It's an AI-powered career decision engine.
             </p>
@@ -166,7 +166,7 @@ export default function Home() {
               { step: 5, title: 'Track & Improve', desc: 'Monitor your applications and success rates. Receive actionable feedback to improve.' },
             ].map((item) => (
               <div key={item.step} className="flex gap-4 sm:gap-6 items-start pb-6 sm:pb-8 border-b border-white/10 last:border-0">
-                <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-gradient-to-br from-indigo-600 to-purple-600 flex items-center justify-center font-bold flex-shrink-0 text-base sm:text-lg shadow-lg">
+                <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-gradient-to-brown from-indigo-600 to-purple-600 flex items-center justify-center font-bold flex-shrink-0 text-base sm:text-lg shadow-lg">
                   {item.step}
                 </div>
                 <div className="flex-1">
@@ -318,11 +318,10 @@ export default function Home() {
                     </li>
                   ))}
                 </ul>
-                <button className={`w-full py-2 sm:py-3 rounded-lg font-semibold text-sm ${
-                  plan.highlighted 
-                    ? 'bg-indigo-600 hover:bg-indigo-700 text-white' 
+                <button className={`w-full py-2 sm:py-3 rounded-lg font-semibold text-sm ${plan.highlighted
+                    ? 'bg-indigo-600 hover:bg-indigo-700 text-white'
                     : 'bg-white/5 border border-white/10 hover:bg-white/10'
-                }`}>
+                  }`}>
                   Get Started
                 </button>
               </div>
@@ -394,7 +393,7 @@ export default function Home() {
               { icon: '🚀', title: 'Continuous Growth', desc: 'Regular features, improvements, and AI model updates for better results.' },
             ].map((item, i) => (
               <div key={i} className="flex gap-4 items-start">
-                <div className="text-3xl flex-shrink-0">{item.icon}</div>
+                <div className="text-3xl flex-shrink- 0">{item.icon}</div>
                 <div>
                   <h3 className="font-bold text-base sm:text-lg mb-1">{item.title}</h3>
                   <p className="muted text-xs sm:text-sm">{item.desc}</p>
@@ -407,7 +406,7 @@ export default function Home() {
 
       {/* ===== FINAL CTA ===== */}
       <section className="py-16 sm:py-24 lg:py-32 text-center relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-indigo-600 via-purple-600 to-pink-600 opacity-90"></div>
+        <div className="absolute inset-0 bg-gradient-to-brown from-indigo-600 via-purple-600 to-pink-600 opacity-90"></div>
         <div className="absolute inset-0 backdrop-blur-3xl"></div>
 
         <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6">
