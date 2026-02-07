@@ -17,9 +17,9 @@ export default function Home() {
     <div className="min-h-screen ai-bg">
 
       {/* ===== HERO SECTION ===== */}
-      <section className="px-4 sm:px-6 py-16 sm:py-24 lg:py-32 text-center max-w-6xl mx-auto">
+      <section className="px-4 sm:px-6 py-16 sm:py-24 lg:py-32 text-center max-w-6xl mx-auto relative z-10">
         <div className="mb-6 sm:mb-8 inline-block">
-          <span className="px-3 sm:px-4 py-1 sm:py-2 rounded-full bg-indigo-500/20 border border-indigo-400/50 text-indigo-300 text-xs sm:text-sm font-semibold">
+          <span className="px-3 sm:px-4 py-1 sm:py-2 rounded-full bg-indigo-500 border border-indigo-400/50 text-indigo-200 text-xs sm:text-sm font-semibold">
             ✨ Powered by Advanced AI
           </span>
         </div>
@@ -319,8 +319,8 @@ export default function Home() {
                   ))}
                 </ul>
                 <button className={`w-full py-2 sm:py-3 rounded-lg font-semibold text-sm ${plan.highlighted
-                    ? 'bg-indigo-600 hover:bg-indigo-700 text-white'
-                    : 'bg-white/5 border border-white/10 hover:bg-white/10'
+                  ? 'bg-indigo-600 hover:bg-indigo-700 text-white'
+                  : 'bg-white/5 border border-white/10 hover:bg-white/10'
                   }`}>
                   Get Started
                 </button>
@@ -441,45 +441,34 @@ export default function Home() {
       </section>
 
       {/* ===== FOOTER ===== */}
-      <section className="py-8 sm:py-12 px-4 sm:px-6 border-t border-white/10">
+      <section className="py-8 sm:py-12 px-4 sm:px-6 border-t border-white/10 bg-indigo-600">
         <div className="max-w-6xl mx-auto grid sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
-          <div>
-            <h3 className="font-bold mb-3 sm:mb-4">Product</h3>
+          <div> <h3 className="font-bold mb-3 sm:mb-4 text-white">Product</h3>
             <ul className="space-y-2 muted text-xs sm:text-sm">
-              <li><Link href="#" className="hover:text-indigo-400">Features</Link></li>
-              <li><Link href="#" className="hover:text-indigo-400">Pricing</Link></li>
-              <li><Link href="#" className="hover:text-indigo-400">How It Works</Link></li>
-            </ul>
-          </div>
-          <div>
-            <h3 className="font-bold mb-3 sm:mb-4">Company</h3>
+              <li><Link href="#" className="hover:text-white text-white/75">Features</Link></li>
+              <li><Link href="#" className="hover:text-white text-white/75">Pricing</Link></li>
+              <li><Link href="#" className="hover:text-white text-white/75">How It Works</Link></li>
+            </ul> </div> <div> <h3 className="font-bold mb-3 sm:mb-4 text-white">Company</h3>
             <ul className="space-y-2 muted text-xs sm:text-sm">
-              <li><Link href="#" className="hover:text-indigo-400">About Us</Link></li>
-              <li><Link href="#" className="hover:text-indigo-400">Blog</Link></li>
-              <li><Link href="#" className="hover:text-indigo-400">Careers</Link></li>
-            </ul>
-          </div>
-          <div>
-            <h3 className="font-bold mb-3 sm:mb-4">Resources</h3>
+              <li><Link href="#" className="hover:text-white text-white/75">About Us</Link></li>
+              <li><Link href="#" className="hover:text-white text-white/75">Blog</Link></li>
+              <li><Link href="#" className="hover:text-white text-white/75">Careers</Link></li>
+            </ul> </div> <div> <h3 className="font-bold mb-3 sm:mb-4 text-white">Resources</h3>
             <ul className="space-y-2 muted text-xs sm:text-sm">
-              <li><Link href="#" className="hover:text-indigo-400">Documentation</Link></li>
-              <li><Link href="#" className="hover:text-indigo-400">API Reference</Link></li>
-              <li><Link href="#" className="hover:text-indigo-400">Support</Link></li>
-            </ul>
-          </div>
-          <div>
-            <h3 className="font-bold mb-3 sm:mb-4">Legal</h3>
+              <li><Link href="#" className="hover:text-white text-white/75">Documentation</Link></li>
+              <li><Link href="#" className="hover:text-white text-white/75">API Reference</Link></li>
+              <li><Link href="#" className="hover:text-white text-white/75">Support</Link></li>
+            </ul> </div>
+          <div> <h3 className="font-bold mb-3 sm:mb-4 text-white">Legal</h3>
             <ul className="space-y-2 muted text-xs sm:text-sm">
-              <li><Link href="#" className="hover:text-indigo-400">Privacy Policy</Link></li>
-              <li><Link href="#" className="hover:text-indigo-400">Terms of Service</Link></li>
-              <li><Link href="#" className="hover:text-indigo-400">Contact</Link></li>
-            </ul>
-          </div>
-        </div>
-        <div className="mt-8 sm:mt-12 pt-6 sm:pt-8 border-t border-white/10 text-center muted text-xs">
-          <p>© 2026 AI Job Portal. All rights reserved. Powered by Advanced AI & Machine Learning.</p>
+              <li><Link href="#" className="hover:text-white text-white/75">Privacy Policy</Link></li>
+              <li><Link href="#" className="hover:text-white text-white/75">Terms of Service</Link></li>
+              <li><Link href="#" className="hover:text-white text-white/75">Contact</Link></li> </ul> </div>
+        </div> <div className="mt-8 sm:mt-12 pt-6 sm:pt-8 border-t border-white/10 text-center muted text-xs">
+          <p className='text-white'>© 2026 AI Job Portal. All rights reserved. Powered by Advanced AI & Machine Learning.</p>
         </div>
       </section>
+
 
     </div>
   );
