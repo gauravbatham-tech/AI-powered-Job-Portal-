@@ -13,123 +13,109 @@ export default function Navbar() {
   const router = useRouter();
 
   const [mounted, setMounted] = useState(false);
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [userMenuOpen, setUserMenuOpen] = useState(false);
   const [themeMenuOpen, setThemeMenuOpen] = useState(false);
 
-  useEffect(() => {
-    setMounted(true);
-  }, []);
+  useEffect(() => setMounted(true), []);
+  if (!mounted) return null;
 
   const handleLogout = () => {
     logout();
     router.push('/');
     setUserMenuOpen(false);
-    setMobileMenuOpen(false);
   };
 
-  if (!mounted) return null;
-
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 backdrop-blur-xl bg-white/5 border-b border-white/10">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
+    <nav className="fixed top-0 left-0 right-0 z-50">
 
-        {/* LOGO */}
-        <Link href="/" className="flex items-center gap-2">
-          <Image
-            src="/recruitx-logo.svg"
-            alt="RecruitX"
-            width={28}
-            height={28}
-            priority
-          />
-          <span className="text-xl font-extrabold gradient-text">
-            RecruitX
-          </span>
-        </Link>
+      {/* Gradient background */}
+      <div className="absolute inset-0 bg-indigo-600"></div>
+      <div className="absolute inset-0 bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 opacity-80"></div>
+      <div className="absolute inset-0 backdrop-blur-xl"></div>
 
-        {/* RIGHT */}
-        <div className="flex items-center gap-3">
+      {/* Content */}
+      <div className="relative border-b border-white/10">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
 
-          {/* THEME */}
-          <div className="relative">
-            <button
-              onClick={() => setThemeMenuOpen(!themeMenuOpen)}
-              className="p-2 rounded-lg hover:bg-white/10 transition"
-            >
-              {theme === 'light' && '☀️'}
-              {theme === 'dark' && '🌙'}
-              {theme === 'system' && '💻'}
-            </button>
+          {/* LOGO */}
+          <Link href="/" className="flex items-center gap-2">
+            <Image
+              src="/recruitx-logo.svg"
+              alt="RecruitX"
+              width={28}
+              height={28}
+              priority
+            />
+            <span className="text-xl font-extrabold text-white">
+              RecruitX
+            </span>
+          </Link>
 
-            {themeMenuOpen && (
-              <div className="absolute right-0 mt-2 w-40 glass p-2 rounded-lg">
-                <button
-                  onClick={() => setTheme('light')}
-                  className="block w-full px-3 py-2 text-left hover:bg-white/10 rounded"
-                >
-                  ☀️ Light
-                </button>
-                <button
-                  onClick={() => setTheme('dark')}
-                  className="block w-full px-3 py-2 text-left hover:bg-white/10 rounded"
-                >
-                  🌙 Dark
-                </button>
-                <button
-                  onClick={() => setTheme('system')}
-                  className="block w-full px-3 py-2 text-left hover:bg-white/10 rounded"
-                >
-                  💻 System
-                </button>
-              </div>
-            )}
-          </div>
+          {/* RIGHT */}
+          <div className="flex items-center gap-3 text-white">
 
-          {!user && (
-            <>
-              <Link href="/login" className="px-4 py-2 rounded-lg hover:bg-white/90 hover:text-gray-900 transition">
-                Login
-              </Link>
-              <Link
-                href="/register"
-                className="px-4 py-2 rounded-lg bg-indigo-600 text-white hover:bg-indigo-700 transition hover: shadow-lg"
-              >
-                Get Started
-              </Link>
-            </>
-          )}
-
-          {user && (
+            {/* THEME SWITCH */}
             <div className="relative">
               <button
-                onClick={() => setUserMenuOpen(!userMenuOpen)}
-                className="flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-white/10"
+                onClick={() => setThemeMenuOpen(!themeMenuOpen)}
+                className="p-2 rounded-lg hover:bg-white/10 transition"
               >
-                <div className="w-8 h-8 rounded-full bg-indigo-600 flex items-center justify-center font-bold">
-                  {user.firstName?.charAt(0).toUpperCase()}
-                </div>
-                <span>{user.firstName}</span>
+                {theme === 'light' && '☀️'}
+                {theme === 'dark' && '🌙'}
+                {theme === 'system' && '💻'}
               </button>
 
-              {userMenuOpen && (
-                <div className="absolute right-0 mt-2 w-48 glass p-2 rounded-lg">
-                  <Link href="/dashboard" className="block px-3 py-2 hover:bg-white/10 rounded">
-                    Dashboard
-                  </Link>
-                  <Link href="/profile" className="block px-3 py-2 hover:bg-white/10 rounded">
-                    Profile
-                  </Link>
-                  <button
-                    onClick={handleLogout}
-                    className="w-full text-left px-3 py-2 hover:bg-red-500/10 text-red-400 rounded"
-                  >
-                    Logout
-                  </button>
+              {themeMenuOpen && (
+                <div className="absolute right-0 mt-2 w-40 glass p-2 rounded-lg">
+                  <button onClick={() => setTheme('light')} className="block w-full px-3 py-2 text-left hover:bg-white/10 rounded">☀️ Light</button>
+                  <button onClick={() => setTheme('dark')} className="block w-full px-3 py-2 text-left hover:bg-white/10 rounded">🌙 Dark</button>
+                  <button onClick={() => setTheme('system')} className="block w-full px-3 py-2 text-left hover:bg-white/10 rounded">💻 System</button>
                 </div>
               )}
             </div>
-          )}
+
+            {!user && (
+              <>
+                <Link href="/login" className="px-4 py-2 rounded-lg hover:bg-white/10 transition">
+                  Login
+                </Link>
+                <Link
+                  href="/register"
+                  className="px-4 py-2 rounded-lg bg-white text-indigo-700 font-semibold hover:bg-gray-100 transition"
+                >
+                  Get Started
+                </Link>
+              </>
+            )}
+
+            {user && (
+              <div className="relative">
+                <button
+                  onClick={() => setUserMenuOpen(!userMenuOpen)}
+                  className="flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-white/10"
+                >
+                  <div className="w-8 h-8 rounded-full bg-white text-indigo-700 flex items-center justify-center font-bold">
+                    {user.firstName?.charAt(0).toUpperCase()}
+                  </div>
+                  <span>{user.firstName}</span>
+                </button>
+
+                {userMenuOpen && (
+                  <div className="absolute right-0 mt-2 w-48 glass p-2 rounded-lg">
+                    <Link href="/dashboard" className="block px-3 py-2 hover:bg-white/10 rounded">Dashboard</Link>
+                    <Link href="/profile" className="block px-3 py-2 hover:bg-white/10 rounded">Profile</Link>
+                    <button
+                      onClick={handleLogout}
+                      className="w-full text-left px-3 py-2 hover:bg-red-500/10 text-red-400 rounded"
+                    >
+                      Logout
+                    </button>
+                  </div>
+                )}
+              </div>
+            )}
+
+          </div>
         </div>
       </div>
     </nav>
