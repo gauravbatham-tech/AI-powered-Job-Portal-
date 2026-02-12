@@ -30,7 +30,7 @@ export default function Navbar() {
 
       {/* Gradient background */}
       <div className="absolute inset-0 bg-indigo-600"></div>
-      <div className="absolute inset-0 bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 opacity-80"></div>
+      <div className="absolute inset-0 bg-gradient-to-red from-indigo-600 via-purple-600 to-pink-600 opacity-80"></div>
       <div className="absolute inset-0 backdrop-blur-xl"></div>
 
       {/* Content */}
