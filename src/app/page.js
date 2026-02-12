@@ -19,7 +19,7 @@ export default function Home() {
       {/* ===== HERO SECTION ===== */}
       <section className="relative overflow-hidden">
 
-        <div className="absolute inset-0 bg-gradient-to-b from-indigo-700 via-indigo-600 to-violet-700"></div>
+        <div className="absolute inset-0 bg-gradient-to-blue from-indigo-700 via-indigo-600 to-violet-700"></div>
 
         <div className="absolute inset-0 bg-black/10"></div>
 
