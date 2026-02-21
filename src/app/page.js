@@ -17,65 +17,112 @@ export default function Home() {
     <div className="min-h-screen ai-bg">
 
       {/* ===== HERO SECTION ===== */}
-      <section className="relative overflow-hidden">
+      <section className="relative overflow-hidden bg-white dark:bg-transparent">
 
-        <div className="absolute inset-0 bg-gradient-to-blue from-indigo-700 via-indigo-600 to-violet-700"></div>
+        {/* Dark mode gradient ONLY */}
+        <div className="
+    absolute inset-0 hidden dark:block
+    bg-gradient-to-br from-indigo-700 via-indigo-600 to-violet-700
+  " />
 
-        <div className="absolute inset-0 bg-black/10"></div>
+        {/* Dark overlay */}
+        <div className="absolute inset-0 hidden dark:block bg-black/10"></div>
 
         <div className="relative z-10 px-4 sm:px-6 py-16 sm:py-24 lg:py-32 text-center max-w-6xl mx-auto">
 
+          {/* Badge */}
           <div className="mb-6 sm:mb-8 inline-block">
-            <span className="px-4 py-2 rounded-full
-        bg-white/10 border border-white/20
-        text-white text-xs sm:text-sm font-semibold
+            <span className="
+        px-4 py-2 rounded-full text-xs sm:text-sm font-semibold
+        bg-indigo-100 text-indigo-700 border border-indigo-200
+        dark:bg-white/10 dark:text-white dark:border-white/20
       ">
               ✨ Powered by Advanced AI
             </span>
           </div>
 
-          <h1 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-extrabold leading-tight mb-4 sm:mb-6 text-white">
-            Jobs shouldn’t be guessed. <br className="hidden sm:block" />
-            <span className="text-indigo-200">They should be predicted.</span>
+          {/* Heading */}
+          <h1 className="
+      text-3xl sm:text-4xl lg:text-5xl xl:text-6xl
+      font-extrabold leading-tight mb-4 sm:mb-6
+      text-gray-900 dark:text-white
+    ">
+            Jobs shouldn’t be guessed.
+            <br className="hidden sm:block" />
+            <span className="text-indigo-600 dark:text-indigo-200">
+              They should be predicted.
+            </span>
           </h1>
 
-          <p className="text-base sm:text-lg lg:text-xl text-indigo-100 max-w-3xl mx-auto mb-6 sm:mb-10 leading-relaxed">
+          {/* Subtitle */}
+          <p className="
+      text-base sm:text-lg lg:text-xl
+      text-gray-600 dark:text-indigo-100
+      max-w-3xl mx-auto mb-6 sm:mb-10 leading-relaxed
+    ">
             Our AI understands your resume and surfaces opportunities where you
             actually have a real chance — before you waste time applying.
           </p>
 
+          {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center mb-10">
+
+            {/* Primary CTA */}
             <Link
               href="/register"
-              className="px-6 sm:px-10 py-3 sm:py-4
-          bg-white text-indigo-700 rounded-xl font-semibold
-          hover:bg-gray-100 transition shadow-lg
+              className="
+          px-6 sm:px-10 py-3 sm:py-4 rounded-xl font-semibold
+          border border-indigo-300 text-indigo-700 hover:bg-indigo-50
+          transition
+          dark:border-white/30 dark:text-white
+          dark:hover:bg-white dark:hover:text-indigo-700
         "
             >
               Let AI Analyze You
             </Link>
 
+            {/* Secondary CTA */}
             <Link
               href="/jobs"
-              className="px-6 sm:px-10 py-3 sm:py-4
-          border border-white/30 text-white rounded-xl font-semibold
-          hover:bg-white hover:text-indigo-700 transition
+              className="
+          px-6 sm:px-10 py-3 sm:py-4 rounded-xl font-semibold
+          border border-indigo-300 text-indigo-700 hover:bg-indigo-50
+          transition
+          dark:border-white/30 dark:text-white
+          dark:hover:bg-white dark:hover:text-indigo-700
         "
             >
               Explore Smart Jobs
             </Link>
           </div>
 
-          <div className="mt-10 grid grid-cols-2 lg:grid-cols-4 gap-4 text-sm text-indigo-100">
-            <div className="glass p-3 rounded-lg">🧠 Resume Intelligence</div>
-            <div className="glass p-3 rounded-lg">🎯 Match Score</div>
-            <div className="glass p-3 rounded-lg">📊 Skill Gap AI</div>
-            <div className="glass p-3 rounded-lg">🚀 Career Mapping</div>
+          {/* Feature Grid */}
+          <div className="
+      mt-10 grid grid-cols-2 lg:grid-cols-4 gap-4 text-sm
+      text-gray-700 dark:text-indigo-100
+    ">
+            {[
+              "🧠 Resume Intelligence",
+              "🎯 Match Score",
+              "📊 Skill Gap AI",
+              "🚀 Career Mapping",
+            ].map((item) => (
+              <div
+                key={item}
+                className="
+            p-3 rounded-lg
+            bg-white border border-gray-200 shadow-sm
+            dark:bg-white/10 dark:border-white/20 dark:shadow-none
+            backdrop-blur
+          "
+              >
+                {item}
+              </div>
+            ))}
           </div>
 
         </div>
       </section>
-
 
       {/* ===== STATS SECTION ===== */}
       <section className="py-12 sm:py-20 lg:py-24 px-4 sm:px-6">
@@ -393,18 +440,18 @@ export default function Home() {
               href="/register"
               className="px-6 sm:px-10 py-3 sm:py-4 bg-white text-indigo-700 rounded-xl font-semibold hover:bg-gray-100 transition text-sm sm:text-base shadow-lg"
             >
-              Get Started Free
+              Get Started for Free
             </Link>
 
             <Link
               href="/jobs"
-              className="px-6 sm:px-10 py-3 sm:py-4 border-2 border-white text-white rounded-xl font-semibold hover:bg-white hover:text-indigo-600 transition text-sm sm:text-base"
+              className="px-6 sm:px-10 py-3 sm:py-4 bg-white text-indigo-700 rounded-xl font-semibold hover:bg-gray-100 transition text-sm sm:text-base shadow-lg"
             >
               Browse Jobs Now
             </Link>
           </div>
 
-          <p className="text-xs sm:text-sm text-indigo-200 mt-6">
+          <p className="text-xs sm:text-sm text-indigo-600 mt-6">
             No credit card required • Free AI analysis • Cancel anytime
           </p>
         </div>
