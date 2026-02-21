@@ -22,7 +22,7 @@ export default function Home() {
         {/* Dark mode gradient ONLY */}
         <div className="
     absolute inset-0 hidden dark:block
-    bg-gradient-to-br from-indigo-700 via-indigo-600 to-violet-700
+    bg-gradient-to-brown from-indigo-700 via-indigo-600 to-violet-700
   " />
 
         {/* Dark overlay */}
