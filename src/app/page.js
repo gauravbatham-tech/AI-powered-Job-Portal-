@@ -16,113 +16,113 @@ export default function Home() {
   return (
     <div className="min-h-screen ai-bg">
 
-      {/* ===== HERO SECTION ===== */}
-      <section className="relative overflow-hidden bg-white dark:bg-transparent">
+{/* ===== HERO SECTION ===== */}
+<section className="relative overflow-hidden bg-white dark:bg-transparent">
 
-        {/* Dark mode gradient ONLY */}
-        <div className="
+  {/* Dark mode gradient ONLY */}
+  <div className="
     absolute inset-0 hidden dark:block
-    bg-gradient-to-brown from-indigo-700 via-indigo-600 to-violet-700
+     bg-linear-to-br from-indigo-700 via-indigo-600 to-violet-700
   " />
 
-        {/* Dark overlay */}
-        <div className="absolute inset-0 hidden dark:block bg-black/10"></div>
+  {/* Dark overlay */}
+  <div className="absolute inset-0 hidden dark:block bg-black/10"></div>
 
-        <div className="relative z-10 px-4 sm:px-6 py-16 sm:py-24 lg:py-32 text-center max-w-6xl mx-auto">
+  <div className="relative z-10 px-4 sm:px-6 py-16 sm:py-24 lg:py-32 text-center max-w-6xl mx-auto">
 
-          {/* Badge */}
-          <div className="mb-6 sm:mb-8 inline-block">
-            <span className="
+    {/* Badge */}
+    <div className="mb-6 sm:mb-8 inline-block">
+      <span className="
         px-4 py-2 rounded-full text-xs sm:text-sm font-semibold
         bg-indigo-100 text-indigo-700 border border-indigo-200
         dark:bg-white/10 dark:text-white dark:border-white/20
       ">
-              ✨ Powered by Advanced AI
-            </span>
-          </div>
+        ✨ Powered by Advanced AI
+      </span>
+    </div>
 
-          {/* Heading */}
-          <h1 className="
+    {/* Heading */}
+    <h1 className="
       text-3xl sm:text-4xl lg:text-5xl xl:text-6xl
       font-extrabold leading-tight mb-4 sm:mb-6
       text-gray-900 dark:text-white
     ">
-            Jobs shouldn’t be guessed.
-            <br className="hidden sm:block" />
-            <span className="text-indigo-600 dark:text-indigo-200">
-              They should be predicted.
-            </span>
-          </h1>
+      Jobs shouldn’t be guessed.
+      <br className="hidden sm:block" />
+      <span className="text-indigo-600 dark:text-indigo-200">
+        They should be predicted.
+      </span>
+    </h1>
 
-          {/* Subtitle */}
-          <p className="
+    {/* Subtitle */}
+    <p className="
       text-base sm:text-lg lg:text-xl
       text-gray-600 dark:text-indigo-100
       max-w-3xl mx-auto mb-6 sm:mb-10 leading-relaxed
     ">
-            Our AI understands your resume and surfaces opportunities where you
-            actually have a real chance — before you waste time applying.
-          </p>
+      Our AI understands your resume and surfaces opportunities where you
+      actually have a real chance — before you waste time applying.
+    </p>
 
-          {/* CTA Buttons */}
-          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center mb-10">
+    {/* CTA Buttons */}
+    <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center mb-10">
 
-            {/* Primary CTA */}
-            <Link
-              href="/register"
-              className="
+      {/* Primary CTA */}
+      <Link
+        href="/register"
+        className="
           px-6 sm:px-10 py-3 sm:py-4 rounded-xl font-semibold
           border border-indigo-300 text-indigo-700 hover:bg-indigo-50
           transition
           dark:border-white/30 dark:text-white
           dark:hover:bg-white dark:hover:text-indigo-700
         "
-            >
-              Let AI Analyze You
-            </Link>
+      >
+        Let AI Analyze You
+      </Link>
 
-            {/* Secondary CTA */}
-            <Link
-              href="/jobs"
-              className="
+      {/* Secondary CTA */}
+      <Link
+        href="/jobs"
+        className="
           px-6 sm:px-10 py-3 sm:py-4 rounded-xl font-semibold
           border border-indigo-300 text-indigo-700 hover:bg-indigo-50
           transition
           dark:border-white/30 dark:text-white
           dark:hover:bg-white dark:hover:text-indigo-700
         "
-            >
-              Explore Smart Jobs
-            </Link>
-          </div>
+      >
+        Explore Smart Jobs
+      </Link>
+    </div>
 
-          {/* Feature Grid */}
-          <div className="
+    {/* Feature Grid */}
+    <div className="
       mt-10 grid grid-cols-2 lg:grid-cols-4 gap-4 text-sm
       text-gray-700 dark:text-indigo-100
     ">
-            {[
-              "🧠 Resume Intelligence",
-              "🎯 Match Score",
-              "📊 Skill Gap AI",
-              "🚀 Career Mapping",
-            ].map((item) => (
-              <div
-                key={item}
-                className="
+      {[
+        "🧠 Resume Intelligence",
+        "🎯 Match Score",
+        "📊 Skill Gap AI",
+        "🚀 Career Mapping",
+      ].map((item) => (
+        <div
+          key={item}
+          className="
             p-3 rounded-lg
             bg-white border border-gray-200 shadow-sm
             dark:bg-white/10 dark:border-white/20 dark:shadow-none
             backdrop-blur
           "
-              >
-                {item}
-              </div>
-            ))}
-          </div>
-
+        >
+          {item}
         </div>
-      </section>
+      ))}
+    </div>
+
+  </div>
+</section>
 
       {/* ===== STATS SECTION ===== */}
       <section className="py-12 sm:py-20 lg:py-24 px-4 sm:px-6">
@@ -182,7 +182,7 @@ export default function Home() {
           </div>
 
           <div className="bg-gradient-to-red from-indigo-600/20 to-purple-600/20 border border-indigo-500/30 p-6 rounded-lg text-center">
-            <p className="text-indigo-300 font-semibold text-base sm:text-lg">
+            <p className="text-indigo-500 font-semibold text-base sm:text-lg">
               This isn't another job portal. It's an AI-powered career decision engine.
             </p>
           </div>

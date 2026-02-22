@@ -48,7 +48,7 @@ export default function DashboardPage() {
 
             {/* AI SCORE */}
             {user?.role === 'candidate' && (
-              <div className="flex sm:flex-col text-right flex-shrink-0">
+              <div className="flex sm:flex-col text-right shrink-0 gap-1">
                 <span className="text-xs sm:text-sm muted">AI Profile Score</span>
                 <span className="text-lg sm:text-2xl font-bold text-indigo-400 sm:ml-0 ml-auto">
                   78%
